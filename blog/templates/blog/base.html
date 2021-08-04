@@ -11,8 +11,8 @@
     </head>
     <body>
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="{% url 'blog:post_list' %}">My Blog</a>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'blog:post_list' %}">Geeks School</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,12 +21,6 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'blog:post_list' %}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0" method="GET" action="{% url 'blog:post_search' %}">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -34,8 +28,9 @@
           </form>
         </div>
       </nav>
+      <br>
       <div id="sidebar">
-        <h2> My Blog </h2>
+        <h2> Geeks School </h2>
         <p>I've wriitten {% total_posts %} posts so far</p>
         <p>
           <a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a>

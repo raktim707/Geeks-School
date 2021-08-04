@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% load blog_tags %}
+{%  load static %}
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
@@ -12,7 +13,7 @@
                 <div class="card single_post">
                     <div class="body">
                         <div class="img-post">
-                            <img class="d-block img-fluid" src="https://via.placeholder.com/800x280/87CEFA/000000" alt="First slide">
+                            <img class="d-block img-fluid" src="{% if post.image %}{{ post.image.url }}{% else %} {% static 'img/no_img.png' %}{% endif %}">
                         </div>
                         <h2><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
                         <p class="date">
@@ -22,31 +23,39 @@
                             <a href="{% url 'blog:post_share' post.id %}">Share this post</a>
                         </p>
                     </div>                   
-                </div>
-                <p>
-                    {{ post.body|markdown }}
-                </p>    
+                </div> 
+                <span class="note">
+                    <p>
+                        {{ post.body|markdown }}
+                    </p> 
+                </span>
+    
     <div class="card">
         <div class="header">
             <h4>Similar posts</h4>
+        <div class="row">
         {% for post in similiar_posts %}
-        <p>
+        <div class="col col-sm-1 col-lg-4" style="padding:10px;">
+        <p style="font-weight: bold; font-size: 100%;">
             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            <small> {{ post.publish }} by {{ post.author }}</small>
-            <p> {{ post.body|truncatewords:30}}</p>
+            <small> by {{ post.author }}</small>
+        <p> {{ post.body|truncatewords:20}}</p>
         </p>
+    </div>
         {% empty %}
             There are no similar posts yet.
         {% endfor %}
+        </div>
             {% with comments.count as total_comments %}
-        <h2>
+        <h3>
             {{ total_comments }} comment{{total_comments|pluralize }}
-        </h2>
+        </h3>
         {% endwith %}
         </div>
+    </nav>
     
     {% for comment in comments %}
-    <div class="body">
+    <div class="body breadcrumb">
         <ul class="comment-reply list-unstyled">
             <li class="row clearfix">
                 <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Awesome Image"></div>
@@ -72,18 +81,18 @@
         </div>
             
         {% else %}
-        <h3>Leave a reply <small>Your email address will not be published. Required fields are marked*</small></h3>
+        <h4>Leave a reply <small>Your email address will not be published. Required fields are marked*</small></h4>
     </div>
     <div class="body">
         <div class="comment-form">
             <form method="POST" class="row clearfix">
                 {% csrf_token %}
-                <div class="col-sm-8">
+                <div class="col col-md-4">
                     <div class="form-group">
                         {{ comment_form.name | as_crispy_field}}
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                     <div class="form-group">
                         {{comment_form.email | as_crispy_field}}
                     </div>

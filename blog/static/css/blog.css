@@ -51,6 +51,12 @@ p.tags {
     font-size: 16px;
 }
 
+span.note {
+    display: block;
+    padding-left: 30px;
+    text-align:justify;
+}
+
 /* pagination */
 .pagination { 
     margin:40px 0; 
@@ -133,7 +139,7 @@ input[type=submit] {
     .card .header {
     color: #444;
     padding: 20px;
-    position: relative;
+    position:relative;
     box-shadow: none;
     }
     .single_post {
